@@ -7,10 +7,10 @@ plugins {
 }
 
 android {
-    namespace = "com.moriawe.testapp.android"
+    namespace = "com.moriawe.translationapp.android"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.moriawe.testapp.android"
+        applicationId = "com.moriawe.translationapp.android"
         minSdk = 28
         targetSdk = 34
         versionCode = 1

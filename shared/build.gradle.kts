@@ -48,7 +48,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.moriawe.testapp"
+    namespace = "com.moriawe.translationapp"
     compileSdk = 34
     defaultConfig {
         minSdk = 28
