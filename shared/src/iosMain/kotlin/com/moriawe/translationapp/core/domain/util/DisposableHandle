@@ -1,0 +1,3 @@
+package com.moriawe.translationapp.core.domain.util
+
+fun interface DisposableHandle: kotlinx.coroutines.DisposableHandle
