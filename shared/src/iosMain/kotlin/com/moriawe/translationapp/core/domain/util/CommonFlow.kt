@@ -4,7 +4,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 
 
-actual class CommonFlow actual constructor(
+actual open class CommonFlow actual constructor(
 private val flow: Flow<T>
 ): Flow<T> by flow {
     fun subsribe(
