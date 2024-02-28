@@ -1,73 +1,68 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
-    kotlin("plugin.serialization") version libs.kotlin-version
-    id("com.squareup.sqldelight")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+    //alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.sqlDelightGradlePlugin)
 }
 
 kotlin {
-    android()
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    androidTarget {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
+
+//    listOf(
+//        iosX64(),
+//        iosArm64(),
+//        iosSimulatorArm64()
+//    ).forEach {
+//        it.binaries.framework {
+//            baseName = "shared"
+//            isStatic = true
+//        }
+//    }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(libs.ktor-core)
-                implementation(libs.ktor-serialization)
-                implementation(libs.ktor-serializationJson)
-                implementation(libs.sql-delight-runtime)
-                implementation(libs.sql-delight-coroutines-extensions)
-                implementation(libs.kotlin-date-time)
-            }
+        commonMain.dependencies {
+            implementation(libs.ktor.core)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.sql.delight.runtime)
+            implementation(libs.sql.delight.coroutines.extensions)
+            implementation(libs.kotlin.date.time)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-                implementation(libs.assertk)
-                implementation(libs.turbine)
-            }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.assertk)
+            implementation(libs.turbine)
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.ktor-android)
-                implementation(libs.sql-delight-android-driver)
-            }
-        }
-        val androidTest by getting
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-
-            dependencies {
-                implementation(libs.ktor-ios)
-                implementation(libs.sql-delight-native-driver)
-            }
-        }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
+        androidMain.dependencies {
+            implementation(libs.ktor.android)
+            implementation(libs.sql.delight.android.driver)
         }
     }
 }
 
 android {
-    namespace = "com.plcoding.translator_kmm"
-    compileSdk = 33
+    namespace = "com.moriawe.testapp"
+    compileSdk = 34
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
+        minSdk = 28
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+sqldelight {
+    database("TranslateDatabase") {
+        //packageName = "com.plcoding.translator_kmm.database"
+        packageName = "com.moriawe.translationapp.database"
+        sourceFolders = listOf("sqldelight")
     }
 }

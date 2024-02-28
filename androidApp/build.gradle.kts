@@ -1,18 +1,18 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
-    kotlin("plugin.serialization") version libs.kotlin-version
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.hiltGradlePlugin)
+    alias(libs.plugins.kotlinSerialization)
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.plcoding.translator_kmm.android"
-    compileSdk = 33
+    namespace = "com.moriawe.testapp.android"
+    compileSdk = 34
     defaultConfig {
-        applicationId = "com.plcoding.translator_kmm.android"
-        minSdk = 24
-        targetSdk = 33
+        applicationId = "com.moriawe.testapp.android"
+        minSdk = 28
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }
@@ -20,9 +20,9 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.compose-version
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -32,32 +32,38 @@ android {
             isMinifyEnabled = false
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
-    implementation(project(":shared"))
-    implementation(libs.compose-ui)
-    implementation(libs.compose-ui-tooling)
-    implementation(libs.compose-ui-tooling-preview)
-    implementation(libs.compose-foundation)
-    implementation(libs.compose-material3)
-    implementation(libs.androidx-activity-compose)
-    implementation(libs.compose-icons-extended)
-    implementation(libs.compos-navigation)
-    implementation(libs.coilCompose)
+    implementation(projects.shared)
+    implementation(libs.compose.ui)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material3)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.compose.icon.extended)
+    implementation(libs.compose.navigation)
+    implementation(libs.coil.compose)
 
-    implementation(libs.hilt-android)
-    kapt(libs.hilt-android-compiler)
-    kapt(libs.hilt-compiler)
-    implementation(libs.hilt-navigation-compose)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
 
-    implementation(libs.ktor-android)
+    implementation(libs.ktor.android)
 
-    androidTestImplementation(libs.test-runner)
+    androidTestImplementation(libs.test.runner)
     androidTestImplementation(libs.jUnit)
-    androidTestImplementation(libs.compose-testing)
-    debugImplementation(libs.compose-test-manifest)
+    androidTestImplementation(libs.compose.testing)
+    androidTestImplementation(libs.test.rules)
+    debugImplementation(libs.compose.test.manifest)
 
-    kaptAndroidTest(libs.hilt-android-compiler)
-    androidTestImplementation(libs.hilt-testing)
+    androidTestImplementation(libs.hilt.testing)
 }
