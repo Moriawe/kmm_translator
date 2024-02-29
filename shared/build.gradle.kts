@@ -59,10 +59,17 @@ android {
     }
 }
 
-sqldelight {
-    database("TranslateDatabase") {
-        //packageName = "com.plcoding.translator_kmm.database"
-        packageName = "com.moriawe.translationapp.database"
-        sourceFolders = listOf("sqldelight")
+
+    sqldelight {
+        databases {
+            create("TranslateDatabase") {
+                packageName.set("com.moriawe.translationapp.database")
+                //dialect("app.cash.sqldelight:mysql-dialect:2.0.1")
+                // Version catalogs also work!
+                //dialect(libs.sqldelight.dialects.mysql)
+
+                //sourceFolders = ["sqldelight"]
+                //deriveSchemaFromMigrations = true
+            }
+        }
     }
-}

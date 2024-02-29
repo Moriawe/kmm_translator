@@ -1,0 +1,14 @@
+package com.moriawe.translationapp.translate.data.history
+
+import database.HistoryEntity
+import com.moriawe.translationapp.translate.domain.history.HistoryItem
+
+fun HistoryEntity.toHistoryItem(): HistoryItem {
+    return HistoryItem(
+    id = id,
+    fromLanguageCode = fromLanguageCode,
+    fromText = fromText,
+    toLanguageCode = toLanguageCode,
+    toText = toText
+    )
+}
