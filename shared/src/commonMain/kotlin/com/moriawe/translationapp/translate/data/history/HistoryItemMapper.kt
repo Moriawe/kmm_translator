@@ -1,7 +1,7 @@
 package com.moriawe.translationapp.translate.data.history
 
-import database.HistoryEntity
 import com.moriawe.translationapp.translate.domain.history.HistoryItem
+import database.HistoryEntity
 
 fun HistoryEntity.toHistoryItem(): HistoryItem {
     return HistoryItem(

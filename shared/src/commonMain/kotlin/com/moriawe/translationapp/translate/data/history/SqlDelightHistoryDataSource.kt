@@ -7,7 +7,9 @@ import com.moriawe.translationapp.core.domain.util.toCommonFlow
 import com.moriawe.translationapp.database.TranslateDatabase
 import com.moriawe.translationapp.translate.domain.history.HistoryDataSource
 import com.moriawe.translationapp.translate.domain.history.HistoryItem
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
+import kotlinx.datetime.Clock
 
 class SqlDelightHistoryDataSource(
     db: TranslateDatabase
@@ -18,7 +20,7 @@ class SqlDelightHistoryDataSource(
         return queries
             .getHistory()
             .asFlow()
-            .mapToList()
+            .mapToList(Dispatchers.Default)
             .map { history ->
                 history.map {
                     it.toHistoryItem()
@@ -28,6 +30,13 @@ class SqlDelightHistoryDataSource(
     }
 
     override suspend fun insertHistoryItem(item: HistoryItem) {
-        TODO("Not yet implemented")
+        queries.insertHistoryEntity(
+            id = item.id,
+            fromLanguageCode = item.fromLanguageCode,
+            fromText = item.fromText,
+            toLanguageCode = item.toLanguageCode,
+            toText = item.toText,
+            timestamp = Clock.System.now().toEpochMilliseconds()
+        )
     }
 }
