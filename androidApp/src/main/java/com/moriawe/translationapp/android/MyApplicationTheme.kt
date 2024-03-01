@@ -5,40 +5,69 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Typography
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.moriawe.translationapp.android.core.theme.darkColors
+import com.moriawe.translationapp.android.core.theme.lightColors
 
 @Composable
 fun MyApplicationTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+
     val colors = if (darkTheme) {
-        darkColorScheme(
-            primary = Color(0xFFBB86FC),
-            secondary = Color(0xFF03DAC5),
-            tertiary = Color(0xFF3700B3)
-        )
+        darkColors
     } else {
-        lightColorScheme(
-            primary = Color(0xFF6200EE),
-            secondary = Color(0xFF03DAC5),
-            tertiary = Color(0xFF3700B3)
-        )
+        lightColors
     }
+
+    val sfProText = FontFamily(
+        Font(
+            resId = R.font.sf_pro_text_regular,
+            weight = FontWeight.Normal
+        ),
+        Font(
+            resId = R.font.sf_pro_text_medium,
+            weight = FontWeight.Medium
+        ),
+        Font(
+            resId = R.font.sf_pro_text_bold,
+            weight = FontWeight.Bold
+        ),
+    )
+
     val typography = Typography(
+        headlineLarge = TextStyle(
+            fontFamily = sfProText,
+            fontWeight = FontWeight.Bold,
+            fontSize = 30.sp
+        ),
+        headlineMedium = TextStyle(
+            fontFamily = sfProText,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp
+        ),
+        headlineSmall = TextStyle(
+            fontFamily = sfProText,
+            fontWeight = FontWeight.Medium,
+            fontSize = 18.sp
+        ),
         bodyMedium = TextStyle(
-            fontFamily = FontFamily.Default,
+            fontFamily = sfProText,
             fontWeight = FontWeight.Normal,
-            fontSize = 16.sp
-        )
+            fontSize = 14.sp
+        ),
+        bodySmall = TextStyle(
+            fontFamily = sfProText,
+            fontWeight = FontWeight.Normal,
+            fontSize = 12.sp
+        ),
     )
     val shapes = Shapes(
         small = RoundedCornerShape(4.dp),
