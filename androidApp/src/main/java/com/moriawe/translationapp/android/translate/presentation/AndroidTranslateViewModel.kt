@@ -20,7 +20,8 @@ class AndroidTranslateViewModel @Inject constructor(
         TranslateViewModel(
             translate = translate,
             historyDataSource = historyDataSource,
-            coroutineScope = viewModelScope)
+            coroutineScope = viewModelScope
+        )
     }
 
     val state = viewModel.state

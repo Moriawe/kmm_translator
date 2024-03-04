@@ -16,6 +16,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -52,9 +53,9 @@ fun LanguageDropDown(
         }
         Row(
             modifier = Modifier
-                .fillMaxWidth()
                 .clickable(onClick = onClick)
-                .padding(16.dp)
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
                 model = language.drawableRes,
@@ -63,7 +64,8 @@ fun LanguageDropDown(
             )
             Spacer(modifier = Modifier.size(16.dp))
             Text(
-                text = language.language.langName
+                text = language.language.langName,
+                color = LightBlue
             )
             Icon(
                imageVector = if(isOpen) Icons.Default.ArrowDropUp else Icons.Default.ArrowDropDown,
