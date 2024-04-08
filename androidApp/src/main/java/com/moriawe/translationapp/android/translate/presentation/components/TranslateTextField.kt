@@ -15,7 +15,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,18 +42,18 @@ import com.moriawe.translationapp.core.presentation.UiLanguage
 
 @Composable
 fun TranslateTextField(
-    fromText: String,
-    toText: String?,
-    isTranslating: Boolean,
-    fromLanguage: UiLanguage,
-    toLanguage: UiLanguage,
-    onTranslateClick: () -> Unit,
-    onTextChange: (String) -> Unit,
-    onCopyClick: (String) -> Unit,
-    onCloseClick: () -> Unit,
-    onSpeakerClick: () -> Unit,
-    onTextFieldClick: () -> Unit,
-    modifier: Modifier = Modifier
+fromText: String,
+toText: String?,
+isTranslating: Boolean,
+fromLanguage: UiLanguage,
+toLanguage: UiLanguage,
+onTranslateClick: () -> Unit,
+onTextChange: (String) -> Unit,
+onCopyClick: (String) -> Unit,
+onCloseClick: () -> Unit,
+onSpeakerClick: () -> Unit,
+onTextFieldClick: () -> Unit,
+modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
@@ -68,7 +67,7 @@ fun TranslateTextField(
             .padding(16.dp)
     ) {
         AnimatedContent(
-            targetState = toText, label =""
+            targetState = toText
         ) { toText ->
             if(toText == null || isTranslating) {
                 IdleTranslateTextField(
@@ -129,9 +128,7 @@ private fun TranslatedTextField(
                     tint = LightBlue
                 )
             }
-            IconButton(onClick = {
-                onCloseClick
-            }) {
+            IconButton(onClick = onCloseClick) {
                 Icon(
                     imageVector = Icons.Rounded.Close,
                     contentDescription = stringResource(id = R.string.close),
@@ -161,9 +158,7 @@ private fun TranslatedTextField(
                     tint = LightBlue
                 )
             }
-            IconButton(onClick = {
-                onSpeakerClick
-            }) {
+            IconButton(onClick = onSpeakerClick) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.speaker),
                     contentDescription = stringResource(id = R.string.play_loud),
@@ -182,7 +177,6 @@ private fun IdleTranslateTextField(
     onTranslateClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // Is here because can't think of a scenario where it needs to show hint other than when it's unfocused
     var isFocused by remember {
         mutableStateOf(false)
     }
@@ -198,17 +192,21 @@ private fun IdleTranslateTextField(
                 color = MaterialTheme.colorScheme.onSurface
             )
         )
-        if(fromText.isEmpty() && !isFocused) {
+        if (fromText.isEmpty() && !isFocused) {
             Text(
-                text = stringResource(id = R.string.enter_a_text_to_translate),
+                text = stringResource(
+                    id = R.string.enter_a_text_to_translate
+                ),
                 color = LightBlue
             )
         }
         ProgressButton(
-            text = stringResource(id = R.string.translate),
+            text = stringResource(
+                id = R.string.translate
+            ),
             isLoading = isTranslating,
             onClick = onTranslateClick,
-        modifier = Modifier.align(Alignment.BottomEnd)
+            modifier = Modifier.align(Alignment.BottomEnd)
         )
     }
 }
