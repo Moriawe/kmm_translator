@@ -12,7 +12,7 @@ import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import java.io.IOException
+import io.ktor.utils.io.errors.IOException
 
 class KtorTranslateClient(
     private val httpClient: HttpClient
@@ -40,8 +40,8 @@ class KtorTranslateClient(
         }
         when(result.status.value) {
             in 200..299 -> Unit
-            500 -> throw TranslateException(TranslateError.SERVER_ERROR)
             in 400..499 -> throw TranslateException(TranslateError.CLIENT_ERROR)
+            500 -> throw TranslateException(TranslateError.SERVER_ERROR)
             else -> throw TranslateException(TranslateError.UNKNOWN_ERROR)
         }
         return try {
