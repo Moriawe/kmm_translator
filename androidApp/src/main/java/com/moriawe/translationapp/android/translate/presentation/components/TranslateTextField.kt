@@ -200,7 +200,7 @@ private fun IdleTranslateTextField(
         )
         if(fromText.isEmpty() && !isFocused) {
             Text(
-                text = stringResource(id = R.string.enter_text_to_translate),
+                text = stringResource(id = R.string.enter_a_text_to_translate),
                 color = LightBlue
             )
         }
