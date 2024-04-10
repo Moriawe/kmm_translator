@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hiltGradlePlugin)
     alias(libs.plugins.kotlinSerialization)
-    kotlin("kapt")
+    alias(libs.plugins.devtoolsKsp)
 }
 
 android {
@@ -54,7 +54,7 @@ dependencies {
     implementation(libs.coil.compose)
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
     implementation(libs.ktor.android)

@@ -15,7 +15,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform).apply(false)
     alias(libs.plugins.sqlDelightGradlePlugin).apply(false)
     alias(libs.plugins.hiltGradlePlugin).apply(false)
-
+    alias(libs.plugins.devtoolsKsp).apply(false)
 }
 
 allprojects {
