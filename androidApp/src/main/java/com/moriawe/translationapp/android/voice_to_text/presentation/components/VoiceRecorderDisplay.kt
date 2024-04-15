@@ -19,8 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.moriawe.translationapp.android.MyApplicationTheme
 import com.moriawe.translationapp.android.translate.presentation.components.gradientSurface
-import kotlin.math.PI
-import kotlin.math.sin
+import kotlin.random.Random
 
 @Composable
 fun VoiceRecorderDisplay(
@@ -78,9 +77,8 @@ fun VoiceRecorderDisplay(
 fun VoiceRecorderDisplayPreview() {
     MyApplicationTheme {
         VoiceRecorderDisplay(
-            powerRatios = (0..50).map {
-                val percent = it / 100f
-                sin(percent * 2 * PI).toFloat()
+            powerRatios = (0..100).map {
+                Random.nextFloat()
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -88,3 +86,4 @@ fun VoiceRecorderDisplayPreview() {
         )
     }
 }
+
