@@ -85,16 +85,4 @@ android {
 }
 
 
-    sqldelight {
-        databases {
-            create("TranslateDatabase") {
-                packageName.set("com.moriawe.translationapp.database")
-                //dialect("app.cash.sqldelight:mysql-dialect:2.0.1")
-                // Version catalogs also work!
-                //dialect(libs.sqldelight.dialects.mysql)
-                //TODO: Source directory is not working
-                //sourceDirectory.set(file("sqldelight"))
-                //deriveSchemaFromMigrations = true
-            }
-        }
-    }
+
